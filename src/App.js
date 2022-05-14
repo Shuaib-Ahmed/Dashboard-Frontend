@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import "./App.css";
+
+import BarChart from "./components/charts/BarChart";
+import { MainContext } from "./context/MainContext";
 
 function App() {
+  const { data } = useContext(MainContext);
+
+  const result = [];
+
+  if (data.length > 0) {
+    data.forEach(({ intensity, relevence }) => {
+      console.log(intensity, relevence);
+    });
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <BarChart />
     </div>
   );
 }
