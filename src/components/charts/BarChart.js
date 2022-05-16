@@ -1,67 +1,54 @@
 import React from "react";
-
+import ReactFC from "react-fusioncharts";
 import FusionCharts from "fusioncharts";
-import charts from "fusioncharts/fusioncharts.charts";
-import ReactFusioncharts from "react-fusioncharts";
+import Column2D from "fusioncharts/fusioncharts.charts";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 
-// Resolves charts dependancy
-charts(FusionCharts);
+ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
 
-const dataSource = {
-  chart: {
-    caption: "Countries With Most Oil Reserves [2017-18]",
-    subcaption: "In MMbbl = One Million barrels",
-    xaxisname: "Country",
-    yaxisname: "Reserves (MMbbl)",
-    numbersuffix: "K",
-    theme: "fusion",
-  },
-  data: [
-    {
-      label: "Venezuela",
-      value: "290",
-    },
-    {
-      label: "Saudi",
-      value: "260",
-    },
-    {
-      label: "Canada",
-      value: "180",
-    },
-    {
-      label: "Iran",
-      value: "140",
-    },
-    {
-      label: "Russia",
-      value: "115",
-    },
-    {
-      label: "UAE",
-      value: "100",
-    },
-    {
-      label: "US",
-      value: "30",
-    },
-    {
-      label: "China",
-      value: "30",
-    },
-  ],
-};
+const BarChart = ({ data }) => {
+  const result = [];
 
-const BarChart = () => {
-  return (
-    <ReactFusioncharts
-      type="column2d"
-      width="400"
-      height="400"
-      dataFormat="JSON"
-      dataSource={dataSource}
-    />
-  );
+  // extracting all unique relevance values
+  data.forEach(({ intensity, relevance }) => {
+    if (relevance != null) {
+      const index = result.findIndex((element) => {
+        return element.relevance === relevance ? true : false;
+      });
+
+      if (index === -1) {
+        result.push({ relevance: relevance, intensity: intensity, count: 1 });
+      } else {
+        result[index].intensity += intensity;
+        result[index].count += 1;
+      }
+    }
+  });
+
+  result.sort((a, b) => a.relevance - b.relevance);
+
+  // formatting values of both axis
+  result.forEach(({ intensity, relevance, count }, index) => {
+    result[index] = { label: String(relevance), value: intensity / count };
+  });
+
+  const chartConfigs = {
+    type: "column2d",
+    width: "100%",
+    height: "400",
+    dataFormat: "json",
+    dataSource: {
+      chart: {
+        caption: "Article's relevance vs average intensity",
+        xAxisName: "Relevance",
+        yAxisName: "Average Intensity",
+        theme: "candy",
+      },
+      data: result,
+    },
+  };
+
+  return <ReactFC {...chartConfigs} />;
 };
 
 export default BarChart;
