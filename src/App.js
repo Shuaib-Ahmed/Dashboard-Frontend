@@ -1,12 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import "./App.css";
 
-import BarChart from "./components/charts/BarChart";
-import DonutChart from "./components/charts/DonutChart";
-import SimpleBar from "./components/charts/SimpleBar";
-import ScrollChart from "./components/charts/ScrollChart";
-
 import LoadingSpinner from "./components/LoadingSpinner";
+import Navbar from "./components/Navbar";
+import ChartSection from "./components/ChartSection";
 
 import { MainContext } from "./context/MainContext";
 
@@ -17,20 +14,10 @@ function App() {
     <div>
       {loading && <LoadingSpinner />}
       {!loading && (
-        <div className="chartsContainer">
-          <div className="chartContainer">
-            <BarChart data={data} />
-          </div>
-          <div className="chartContainer">
-            <DonutChart data={data} />
-          </div>
-          <div className="chartContainer">
-            <SimpleBar data={data} />
-          </div>
-          <div className="chartContainer">
-            <ScrollChart data={data} />
-          </div>
-        </div>
+        <Fragment>
+          <Navbar />
+          <ChartSection data={data} />
+        </Fragment>
       )}
     </div>
   );

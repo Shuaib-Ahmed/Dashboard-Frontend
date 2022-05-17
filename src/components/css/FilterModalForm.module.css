@@ -1,0 +1,42 @@
+.form {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  padding: 2rem 0;
+}
+
+.inputContainer {
+  width: 45%;
+}
+.inputContainer label {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+.inputContainer .select {
+  width: 100%;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.buttonContainer {
+  display: block;
+}
+.buttonContainer button {
+  padding: 1rem 2rem;
+  background-color: var(--primaryColor);
+  color: #fff;
+
+  font-size: 2rem;
+  border: none;
+  text-transform: uppercase;
+
+  margin: 1rem 2rem;
+  cursor: pointer;
+}
+.buttonContainer .clearButton{
+  background-color: rgb(209, 75, 75);
+}

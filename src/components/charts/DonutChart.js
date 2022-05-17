@@ -11,7 +11,7 @@ const DonutChart = ({ data }) => {
 
   // formatting values of both axis
   data.forEach(({ topic }) => {
-    if (topic != null) {
+    if (topic.length > 0) {
       const index = result.findIndex(({ label }) => label === topic);
 
       if (index === -1) {
@@ -21,6 +21,8 @@ const DonutChart = ({ data }) => {
       }
     }
   });
+
+  result.sort((a, b) => b.value - a.value);
 
   const chartConfigs = {
     type: "doughnut2d",

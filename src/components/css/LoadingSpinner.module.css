@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 100vw;
   height: 100vh;
 
@@ -18,8 +18,8 @@
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid teal;
-  border-color: teal transparent teal transparent;
+  border: 6px solid var(--primaryColor);
+  border-color: var(--primaryColor) transparent var(--primaryColor) transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
