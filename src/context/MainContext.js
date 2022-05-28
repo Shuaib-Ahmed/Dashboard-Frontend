@@ -7,7 +7,7 @@ export const MainContext = createContext({
   changeFilter: (filter) => {},
 });
 
-const Base_Url = "http://localhost:5000/api/v1";
+const Base_Url = "https://article-dashboard.herokuapp.com/api/v1";
 
 export const MainContextProvider = ({ children }) => {
   const [data, setData] = useState([]);
